@@ -17,6 +17,11 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
+# Set placeholder environment variables for build time
+ENV MONGODB_URI=mongodb://placeholder:27017/placeholder
+ENV NEXTAUTH_SECRET=placeholder_secret_for_build
+ENV NEXTAUTH_URL=http://localhost:3000
+
 # Build the application
 RUN npm run build
 
