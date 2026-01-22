@@ -139,7 +139,11 @@ export default function LabConsole({
 
 
     if (showConsole) {
-        const guacamoleBaseUrl = process.env.NEXT_PUBLIC_GUACAMOLE_URL || 'http://20.193.146.110:8080/guacamole';
+        // Use HTTPS proxy when site is on HTTPS, otherwise use direct HTTP
+        const isHttps = typeof window !== 'undefined' && window.location.protocol === 'https:';
+        const guacamoleBaseUrl = isHttps
+            ? `${window.location.origin}/guacamole`
+            : 'http://20.193.146.110:8080/guacamole';
 
         // Use username/password authentication (works reliably)
         const iframeUrl = `${guacamoleBaseUrl}/#/?username=${encodeURIComponent(guacamoleUsername || '')}&password=${encodeURIComponent(guacamolePassword || '')}`;
