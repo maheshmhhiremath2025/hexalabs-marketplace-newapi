@@ -17,10 +17,13 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Set placeholder environment variables for build time
+# Set ALL placeholder environment variables for build time (from .env.local)
 ENV MONGODB_URI=mongodb://placeholder:27017/placeholder
 ENV NEXTAUTH_SECRET=placeholder_secret_for_build
 ENV NEXTAUTH_URL=http://localhost:3000
+ENV JWT_SECRET=placeholder_jwt_secret
+ENV REDIS_URL=redis://placeholder:6379
+ENV REDIS_ENABLED=false
 ENV AZURE_CLIENT_ID=placeholder
 ENV AZURE_CLIENT_SECRET=placeholder
 ENV AZURE_SUBSCRIPTION_ID=placeholder
@@ -28,6 +31,27 @@ ENV AZURE_TENANT_ID=placeholder
 ENV GUACAMOLE_URL=http://placeholder:8080/guacamole
 ENV GUACAMOLE_USERNAME=placeholder
 ENV GUACAMOLE_PASSWORD=placeholder
+ENV AZURE_AD_DOMAIN=placeholder.onmicrosoft.com
+ENV AZURE_CUSTOM_ROLE_ID=/subscriptions/placeholder/providers/Microsoft.Authorization/roleDefinitions/placeholder
+ENV AZURE_CUSTOM_INITIATIVE_ID=/subscriptions/placeholder/providers/Microsoft.Authorization/policySetDefinitions/placeholder
+ENV EMAIL_USER=placeholder@gmail.com
+ENV EMAIL_PASSWORD=placeholder
+ENV RAZORPAY_KEY_ID=rzp_test_placeholder
+ENV RAZORPAY_KEY_SECRET=placeholder
+ENV NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_placeholder
+ENV EXCHANGE_RATE_USD_TO_INR=83
+ENV TAX_RATE=0.18
+ENV ZOHO_CLIENT_ID=placeholder
+ENV ZOHO_CLIENT_SECRET=placeholder
+ENV ZOHO_REFRESH_TOKEN=placeholder
+ENV ZOHO_ORGANIZATION_ID=placeholder
+ENV ZOHO_AUTH_DOMAIN=https://accounts.zoho.in
+ENV ZOHO_API_DOMAIN=https://www.zohoapis.in
+ENV GOOGLE_CLIENT_ID=placeholder.apps.googleusercontent.com
+ENV GOOGLE_CLIENT_SECRET=placeholder
+ENV MICROSOFT_CLIENT_ID=placeholder
+ENV MICROSOFT_CLIENT_SECRET=placeholder
+ENV ORG_REQUEST_EMAIL=placeholder@hexalabs.online
 
 # Build the application
 RUN npm run build
