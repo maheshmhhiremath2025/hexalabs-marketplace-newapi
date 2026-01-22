@@ -159,7 +159,16 @@ export default function LabConsole({
         });
 
         return (
-            <div className="flex-1 bg-black relative w-full h-full overflow-hidden">
+            <div
+                className="flex-1 bg-black relative w-full h-full overflow-hidden"
+                onClick={() => {
+                    // Focus the iframe when container is clicked
+                    const iframe = document.querySelector('iframe[title="Remote Console"]') as HTMLIFrameElement;
+                    if (iframe) {
+                        iframe.focus();
+                    }
+                }}
+            >
                 <style dangerouslySetInnerHTML={{
                     __html: `
                     iframe {
@@ -180,8 +189,14 @@ export default function LabConsole({
                     src={iframeUrl}
                     allowFullScreen
                     title="Remote Console"
-                    onLoad={() => console.log('[LabConsole] Iframe loaded')}
+                    allow="clipboard-read; clipboard-write; fullscreen"
+                    onLoad={(e) => {
+                        console.log('[LabConsole] Iframe loaded');
+                        // Auto-focus the iframe after load
+                        (e.target as HTMLIFrameElement).focus();
+                    }}
                     onError={(e) => console.error('[LabConsole] Iframe error:', e)}
+                    style={{ pointerEvents: 'auto' }}
                 />
                 {/* Refresh overlay - shows when VM is running */}
                 {showRefreshOverlay && (
