@@ -10,7 +10,7 @@ import User from '@/models/User';
  * Remove member from organization (admin only)
  */
 export const DELETE = withAuth(
-    async (request: NextRequest, auth, context: any) => {
+    async (request: NextRequest, auth) => {
         await dbConnect();
 
         const { orgId, userId } = context.params;

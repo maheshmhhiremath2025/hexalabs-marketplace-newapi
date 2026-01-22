@@ -11,10 +11,13 @@ import User from '@/models/User';
  * Get organization details
  */
 export const GET = withAuth(
-    async (request: NextRequest, auth, context: any) => {
+    async (request: NextRequest, auth) => {
         await dbConnect();
 
-        const { orgId } = context.params;
+        // Extract orgId from URL path
+        const url = new URL(request.url);
+        const pathParts = url.pathname.split('/');
+        const orgId = pathParts[pathParts.length - 1];
 
         if (!orgId) {
             throw Errors.badRequest('Organization ID is required');
@@ -95,10 +98,13 @@ export const GET = withAuth(
  * Update organization details (admin only)
  */
 export const PATCH = withAuth(
-    async (request: NextRequest, auth, context: any) => {
+    async (request: NextRequest, auth) => {
         await dbConnect();
 
-        const { orgId } = context.params;
+        // Extract orgId from URL path
+        const url = new URL(request.url);
+        const pathParts = url.pathname.split('/');
+        const orgId = pathParts[pathParts.length - 1];
 
         if (!orgId) {
             throw Errors.badRequest('Organization ID is required');

@@ -12,10 +12,13 @@ import Order from '@/models/Order';
  * Requires authentication
  */
 export const GET = withAuth(
-    async (request: NextRequest, auth, context: any) => {
+    async (request: NextRequest, auth) => {
         await dbConnect();
 
-        const { userId } = context.params;
+        // Extract userId from URL path
+        const url = new URL(request.url);
+        const pathParts = url.pathname.split('/');
+        const userId = pathParts[pathParts.length - 1];
 
         if (!userId) {
             throw Errors.badRequest('User ID is required');

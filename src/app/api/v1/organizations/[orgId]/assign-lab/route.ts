@@ -13,10 +13,13 @@ import mongoose from 'mongoose';
  * Assign lab license to organization member
  */
 export const POST = withAuth(
-    async (request: NextRequest, auth, context: any) => {
+    async (request: NextRequest, auth) => {
         await dbConnect();
 
-        const { orgId } = context.params;
+        // Extract orgId from URL path
+        const url = new URL(request.url);
+        const pathParts = url.pathname.split('/');
+        const orgId = pathParts[pathParts.length - 1];
 
         if (!orgId) {
             throw Errors.badRequest('Organization ID is required');
