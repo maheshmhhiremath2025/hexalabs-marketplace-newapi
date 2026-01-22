@@ -10,10 +10,13 @@ import Order from '@/models/Order';
  * Get order details
  */
 export const GET = withAuth(
-    async (request: NextRequest, auth, context: any) => {
+    async (request: NextRequest, auth) => {
         await dbConnect();
 
-        const { orderId } = context.params;
+        // Extract orderId from URL path
+        const url = new URL(request.url);
+        const pathParts = url.pathname.split('/');
+        const orderId = pathParts[pathParts.length - 1];
 
         if (!orderId) {
             throw Errors.badRequest('Order ID is required');
@@ -92,10 +95,13 @@ export const GET = withAuth(
  * Admin only
  */
 export const PATCH = withAuth(
-    async (request: NextRequest, auth, context: any) => {
+    async (request: NextRequest, auth) => {
         await dbConnect();
 
-        const { orderId } = context.params;
+        // Extract orderId from URL path
+        const url = new URL(request.url);
+        const pathParts = url.pathname.split('/');
+        const orderId = pathParts[pathParts.length - 1];
 
         if (!orderId) {
             throw Errors.badRequest('Order ID is required');
