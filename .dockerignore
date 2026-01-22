@@ -1,0 +1,45 @@
+# Ignore node_modules
+node_modules
+npm-debug.log
+
+# Ignore .next build output
+.next
+
+# Ignore .env files (sensitive data)
+.env
+.env.local
+.env.production
+.env.development
+
+# Ignore git
+.git
+.gitignore
+
+# Ignore IDE files
+.vscode
+.idea
+
+# Ignore test files
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+
+# Ignore documentation
+*.md
+!README.md
+
+# Ignore development files
+.eslintrc.json
+.prettierrc
+
+# Ignore MongoDB data
+mongodb_data
+postgres_data
+
+# Ignore logs
+*.log
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
