@@ -186,17 +186,27 @@ export default function LabConsole({
                     }
                 `}} />
                 <iframe
+                    id="guacamole-iframe"
+                    name="guacamole-console"
                     src={iframeUrl}
                     allowFullScreen
                     title="Remote Console"
-                    allow="clipboard-read; clipboard-write; fullscreen"
+                    allow="clipboard-read; clipboard-write; fullscreen; keyboard-map *"
+                    tabIndex={0}
                     onLoad={(e) => {
                         console.log('[LabConsole] Iframe loaded');
                         // Auto-focus the iframe after load
-                        (e.target as HTMLIFrameElement).focus();
+                        const iframe = e.target as HTMLIFrameElement;
+                        iframe.focus();
+
+                        // Try to focus again after a short delay (Guacamole needs time to initialize)
+                        setTimeout(() => {
+                            iframe.focus();
+                            console.log('[LabConsole] Iframe re-focused after delay');
+                        }, 1000);
                     }}
                     onError={(e) => console.error('[LabConsole] Iframe error:', e)}
-                    style={{ pointerEvents: 'auto' }}
+                    style={{ pointerEvents: 'auto', outline: 'none' }}
                 />
                 {/* Refresh overlay - shows when VM is running */}
                 {showRefreshOverlay && (
