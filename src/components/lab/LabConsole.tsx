@@ -145,26 +145,15 @@ export default function LabConsole({
             ? `${window.location.origin}/guacamole`
             : 'http://20.193.146.110:8080/guacamole';
 
-        // Build Guacamole URL with direct connection
-        // Format: /guacamole/#/client/CONNECTION_ID?username=X&password=Y
-        // This automatically connects to the VM instead of showing the connection list
-        let iframeUrl: string;
-
-        if (guacamoleConnectionId) {
-            // Direct connection URL - automatically connects to the VM
-            iframeUrl = `${guacamoleBaseUrl}/#/client/${encodeURIComponent(guacamoleConnectionId)}?username=${encodeURIComponent(guacamoleUsername || '')}&password=${encodeURIComponent(guacamolePassword || '')}`;
-        } else {
-            // Fallback to login page if no connection ID
-            iframeUrl = `${guacamoleBaseUrl}/#/?username=${encodeURIComponent(guacamoleUsername || '')}&password=${encodeURIComponent(guacamolePassword || '')}`;
-        }
+        // Simple Guacamole login URL
+        // After login, user will see their connection and can click to connect
+        const iframeUrl = `${guacamoleBaseUrl}/#/?username=${encodeURIComponent(guacamoleUsername || '')}&password=${encodeURIComponent(guacamolePassword || '')}`;
 
         console.log('[LabConsole] Showing Guacamole iframe:', {
             connectionId: guacamoleConnectionId,
             username: guacamoleUsername,
             hasPassword: !!guacamolePassword,
-            hasAuthToken: !!guacamoleAuthToken,
-            authTokenPreview: guacamoleAuthToken ? guacamoleAuthToken.substring(0, 20) + '...' : 'MISSING',
-            usingDirectConnection: !!guacamoleConnectionId,
+            guacamoleBaseUrl,
             iframeUrl: iframeUrl
         });
 
