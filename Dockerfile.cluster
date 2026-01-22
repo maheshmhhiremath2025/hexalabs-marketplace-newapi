@@ -21,6 +21,13 @@ ENV NEXT_TELEMETRY_DISABLED 1
 ENV MONGODB_URI=mongodb://placeholder:27017/placeholder
 ENV NEXTAUTH_SECRET=placeholder_secret_for_build
 ENV NEXTAUTH_URL=http://localhost:3000
+ENV AZURE_CLIENT_ID=placeholder
+ENV AZURE_CLIENT_SECRET=placeholder
+ENV AZURE_SUBSCRIPTION_ID=placeholder
+ENV AZURE_TENANT_ID=placeholder
+ENV GUACAMOLE_URL=http://placeholder:8080/guacamole
+ENV GUACAMOLE_USERNAME=placeholder
+ENV GUACAMOLE_PASSWORD=placeholder
 
 # Build the application
 RUN npm run build
