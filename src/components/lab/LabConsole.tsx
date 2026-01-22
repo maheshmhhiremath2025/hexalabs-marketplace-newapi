@@ -139,7 +139,7 @@ export default function LabConsole({
 
 
     if (showConsole) {
-        const guacamoleBaseUrl = 'http://20.193.146.110:8080/guacamole';
+        const guacamoleBaseUrl = process.env.NEXT_PUBLIC_GUACAMOLE_URL || 'http://20.193.146.110:8080/guacamole';
 
         // Use username/password authentication (works reliably)
         const iframeUrl = `${guacamoleBaseUrl}/#/?username=${encodeURIComponent(guacamoleUsername || '')}&password=${encodeURIComponent(guacamolePassword || '')}`;
