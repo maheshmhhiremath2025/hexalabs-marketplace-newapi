@@ -26,8 +26,8 @@ export async function generateApiKey(params: {
     } = params;
 
     // Generate API key and secret
-    const apiKey = ApiKey.generateKey(environment);
-    const apiSecret = ApiKey.generateSecret();
+    const apiKey = `hx_${environment}_${Math.random().toString(36).substring(2, 15)}${Math.random().toString(36).substring(2, 15)}`;
+    const apiSecret = `sk_${Math.random().toString(36).substring(2, 15)}${Math.random().toString(36).substring(2, 15)}${Math.random().toString(36).substring(2, 15)}`;
 
     // Hash the secret
     const apiSecretHash = await bcrypt.hash(apiSecret, 10);

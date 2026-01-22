@@ -102,7 +102,7 @@ export default function SuperAdminAnalyticsClient({ initialData }: { initialData
                                 cx="50%"
                                 cy="50%"
                                 outerRadius={100}
-                                label={(entry) => `${entry.courseId} (${entry.count})`}
+                                label={(entry: any) => `${entry.courseId} (${entry.count})`}
                             >
                                 {data.courseDistribution.map((entry, index) => (
                                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

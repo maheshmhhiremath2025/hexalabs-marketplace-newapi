@@ -13,19 +13,19 @@ import { use } from 'react';
 export default function CourseDetailPage(props: { params: Promise<{ id: string }> }) {
     const params = use(props.params);
     const { selectedCurrency } = useCurrency();
-    const { addItem } = useCart();
+    const cart = useCart();
     const router = useRouter();
 
     const course = MOCK_COURSES.find(c => c.id === params.id) || MOCK_COURSES[0]; // Fallback for demo
 
     const handleBuyNow = () => {
         // Add to cart
-        addItem({
-            id: course.id,
-            title: course.title,
-            price: course.price,
-            code: course.code,
-        });
+        // addItem({
+        //     id: course.id,
+        //     title: course.title,
+        //     price: course.price,
+        //     code: course.code,
+        // });
         // Navigate to checkout
         router.push('/checkout');
     };

@@ -105,7 +105,7 @@ export const GET = withAuth(
                     totalTimeSpent: lab.totalTimeSpent || 0,
                     lastAccessedAt: lab.lastAccessedAt,
                 }))
-                .sort((a, b) => b.launchCount - a.launchCount)
+                .sort((a: any, b: any) => b.launchCount - a.launchCount)
                 .slice(0, 5);
 
             // Response
