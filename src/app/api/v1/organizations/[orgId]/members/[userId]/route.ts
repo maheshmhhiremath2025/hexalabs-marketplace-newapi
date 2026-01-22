@@ -13,7 +13,11 @@ export const DELETE = withAuth(
     async (request: NextRequest, auth) => {
         await dbConnect();
 
-        const { orgId, userId } = context.params;
+        // Extract orgId and userId from URL path
+        const url = new URL(request.url);
+        const pathParts = url.pathname.split('/');
+        const userId = pathParts[pathParts.length - 1];
+        const orgId = pathParts[pathParts.length - 3]; // /organizations/{orgId}/members/{userId}
 
         if (!orgId || !userId) {
             throw Errors.badRequest('Organization ID and User ID are required');
