@@ -14,12 +14,12 @@ export const GET = withAuth(
         return NextResponse.json({
             message: 'Hello from protected route!',
             user: {
-                id: auth.userId,
-                organizationId: auth.organizationId,
-                tier: auth.tier,
-                authMethod: auth.authMethod,
+                id: auth?.userId,
+                organizationId: auth?.organizationId,
+                tier: auth?.tier,
+                authMethod: auth?.authMethod,
             },
-            scopes: auth.scopes,
+            scopes: auth?.scopes,
         });
     },
     {

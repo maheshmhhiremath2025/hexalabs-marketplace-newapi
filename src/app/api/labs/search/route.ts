@@ -17,8 +17,7 @@ export async function GET(request: NextRequest) {
                 (course.title?.toLowerCase() || '').includes(searchLower) ||
                 (course.code?.toLowerCase() || '').includes(searchLower) ||
                 (course.description?.toLowerCase() || '').includes(searchLower) ||
-                (course.category?.toLowerCase() || '').includes(searchLower) ||
-                (course.provider?.toLowerCase() || '').includes(searchLower)
+                (course.category?.toLowerCase() || '').includes(searchLower)
             );
         }).slice(0, 10); // Limit to 10 results
 
@@ -29,7 +28,6 @@ export async function GET(request: NextRequest) {
             code: course.code,
             description: course.description,
             topic: course.category,
-            provider: course.provider || 'Hexalabs',
             price: course.price,
         }));
 

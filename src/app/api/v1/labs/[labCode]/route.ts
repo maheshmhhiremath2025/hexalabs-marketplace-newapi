@@ -12,10 +12,13 @@ import { withCache, generateCacheKey, CachePrefix, CacheTTL } from '@/lib/cache'
  * Public endpoint
  */
 export const GET = withPublic(
-    async (request: NextRequest, context: any) => {
+    async (request: NextRequest) => {
         await dbConnect();
 
-        const { labCode } = context.params;
+        // Extract labCode from URL path
+        const url = new URL(request.url);
+        const pathParts = url.pathname.split('/');
+        const labCode = pathParts[pathParts.length - 1];
 
         if (!labCode) {
             throw Errors.badRequest('Lab code is required');

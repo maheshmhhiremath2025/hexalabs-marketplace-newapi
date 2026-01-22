@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-<parameter name="authOptions" > from '@/lib/auth';
+import { authOptions } from '@/lib/auth';
 import dbConnect from '@/lib/db';
 import { revokeApiKey, updateApiKey } from '@/lib/api-keys';
 
@@ -10,7 +10,7 @@ import { revokeApiKey, updateApiKey } from '@/lib/api-keys';
  */
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         await dbConnect();
@@ -26,7 +26,7 @@ export async function PATCH(
 
         // @ts-ignore
         const userId = session.user.id;
-        const apiKeyId = params.id;
+        const { id: apiKeyId } = await params;
 
         // Parse request body
         const body = await request.json();
@@ -60,7 +60,7 @@ export async function PATCH(
  */
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         await dbConnect();
@@ -76,7 +76,7 @@ export async function DELETE(
 
         // @ts-ignore
         const userId = session.user.id;
-        const apiKeyId = params.id;
+        const { id: apiKeyId } = await params;
 
         // Revoke API key
         await revokeApiKey(apiKeyId, userId);

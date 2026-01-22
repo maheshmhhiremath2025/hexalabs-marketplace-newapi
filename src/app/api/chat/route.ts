@@ -49,8 +49,12 @@ function getIntelligentResponse(message: string): string {
     // Objectives/Learning outcomes
     if (lowerMessage.includes('what will i learn') || lowerMessage.includes('objectives') ||
         lowerMessage.includes('learning outcomes')) {
-        if (courseMatch) {
-            const [_, lab] = courseMatch;
+        const objectivesMatch = labEntries.find(([courseId, lab]) =>
+            lowerMessage.includes(courseId.toLowerCase()) ||
+            lowerMessage.includes(lab.title.toLowerCase().split(':')[0])
+        );
+        if (objectivesMatch) {
+            const [_, lab] = objectivesMatch;
             return `**Learning Objectives for ${lab.title}:**\n\n${lab.objectives.map(obj => `• ${obj}`).join('\n')}\n\nThis lab provides hands-on experience with real-world scenarios.`;
         }
         return 'Please specify which course you\'re interested in (e.g., "What will I learn in AZ-400?")';
@@ -59,8 +63,12 @@ function getIntelligentResponse(message: string): string {
     // Difficulty level
     if (lowerMessage.includes('difficulty') || lowerMessage.includes('how hard') ||
         lowerMessage.includes('is it difficult')) {
-        if (courseMatch) {
-            const [_, lab] = courseMatch;
+        const difficultyMatch = labEntries.find(([courseId, lab]) =>
+            lowerMessage.includes(courseId.toLowerCase()) ||
+            lowerMessage.includes(lab.title.toLowerCase().split(':')[0])
+        );
+        if (difficultyMatch) {
+            const [_, lab] = difficultyMatch;
             return `**${lab.title}** is rated as **${lab.difficulty}** difficulty.\n\nEstimated completion time: ${lab.estimatedTime} minutes\n\nMake sure you meet the prerequisites for the best learning experience.`;
         }
         return 'Please specify which course you\'re asking about (e.g., "How difficult is SC-200?")';
