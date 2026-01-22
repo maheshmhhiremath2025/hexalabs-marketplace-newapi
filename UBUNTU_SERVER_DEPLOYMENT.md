@@ -180,18 +180,13 @@ git clone https://github.com/maheshmhhiremath2025/hexalabs-marketplace-newapi.gi
 cd hexalabs-marketplace
 ```
 
-**Note:** If the repository is private or you're copying from your local machine:
-
-```powershell
-# On your local Windows machine, copy the entire folder to server:
-scp -r c:\Users\Orcon\.gemini\antigravity\scratch\hexalabs-marketplace username@YOUR_SERVER_IP:~/
-```
+**Note:** The repository contains placeholder values for security. You'll need to update `.env.local` with your actual credentials in the next step.
 
 ### Step 2: Install Dependencies
 
 ```bash
 # Install npm dependencies
-npm install
+npm instal
 
 # This will install all packages from package.json
 ```
@@ -200,30 +195,19 @@ npm install
 
 ## Configure Environment
 
-### Step 1: Copy Your Existing .env.local File
+### Step 1: Update Environment Variables
 
-**Option A: Copy from local machine**
-
-On your **local Windows machine**, run:
-
-```powershell
-# Copy .env.local to server
-scp c:\Users\Orcon\.gemini\antigravity\scratch\hexalabs-marketplace\.env.local username@YOUR_SERVER_IP:~/hexalabs-marketplace/
-```
-
-**Option B: Create manually on server**
-
-On your **Ubuntu server**:
+The repository contains `.env.local` with placeholder values. You need to update it with your actual credentials.
 
 ```bash
 # Navigate to project directory
 cd ~/hexalabs-marketplace
 
-# Create .env.local file
+# Edit .env.local file
 nano .env.local
 ```
 
-Paste your existing `.env.local` content:
+**Replace the placeholder values with your actual credentials:**
 
 ```env
 MONGODB_URI=mongodb://localhost:27020/hexalabs
