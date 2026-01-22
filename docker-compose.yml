@@ -14,10 +14,6 @@ services:
     environment:
       - NODE_ENV=production
       - MONGODB_URI=mongodb://admin:hexalabs123@mongo:27017/hexalabs?authSource=admin
-      - NEXTAUTH_URL=http://localhost:3000
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-      - RAZORPAY_KEY_ID=${RAZORPAY_KEY_ID}
-      - RAZORPAY_KEY_SECRET=${RAZORPAY_KEY_SECRET}
       # Redis Configuration
       - REDIS_ENABLED=true
       - REDIS_URL=redis://redis:6379
