@@ -2,8 +2,7 @@ module.exports = {
     apps: [
         {
             name: 'hexalabs-marketplace',
-            script: 'node_modules/next/dist/bin/next',
-            args: 'start',
+            script: './server.js',
             instances: 4, // 4 worker processes
             exec_mode: 'cluster',
             env: {
