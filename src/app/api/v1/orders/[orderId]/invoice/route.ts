@@ -10,10 +10,13 @@ import Order from '@/models/Order';
  * Get or generate invoice for an order
  */
 export const GET = withAuth(
-    async (request: NextRequest, auth, context: any) => {
+    async (request: NextRequest, auth) => {
         await dbConnect();
 
-        const { orderId } = context.params;
+        // Extract orderId from URL path
+        const url = new URL(request.url);
+        const pathParts = url.pathname.split('/');
+        const orderId = pathParts[pathParts.length - 2]; // -2 because last part is 'invoice'
 
         if (!orderId) {
             throw Errors.badRequest('Order ID is required');
@@ -104,10 +107,13 @@ export const GET = withAuth(
  * Generate Zoho invoice for an order (admin only)
  */
 export const POST = withAuth(
-    async (request: NextRequest, auth, context: any) => {
+    async (request: NextRequest, auth) => {
         await dbConnect();
 
-        const { orderId } = context.params;
+        // Extract orderId from URL path
+        const url = new URL(request.url);
+        const pathParts = url.pathname.split('/');
+        const orderId = pathParts[pathParts.length - 2]; // -2 because last part is 'invoice'
 
         if (!orderId) {
             throw Errors.badRequest('Order ID is required');
