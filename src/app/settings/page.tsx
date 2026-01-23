@@ -81,10 +81,15 @@ export default function SettingsPage() {
             });
 
             if (response.ok) {
+                alert('✅ API key deleted successfully!');
                 fetchApiKeys();
+            } else {
+                const error = await response.json();
+                alert(`❌ Failed to delete API key: ${error.error || 'Unknown error'}`);
             }
         } catch (error) {
             console.error('Failed to delete API key:', error);
+            alert('❌ Failed to delete API key. Please try again.');
         }
     };
 
