@@ -49,7 +49,7 @@ export default function SettingsPage() {
                 body: JSON.stringify({
                     name: newKeyName,
                     description: 'LMS Integration API Key',
-                    scopes: ['read:courses', 'write:orders', 'read:labs', 'write:labs'],
+                    scopes: ['labs:read', 'labs:write', 'users:read', 'orders:read', 'orders:write'],
                     tier: 'standard',
                     environment: 'production'
                 })
