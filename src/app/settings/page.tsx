@@ -6,9 +6,9 @@ import { Key, Copy, Trash2, Plus, Eye, EyeOff, CheckCircle } from 'lucide-react'
 interface ApiKey {
     id: string;
     name: string;
-    key: string;
+    apiKey: string;
     createdAt: string;
-    lastUsed?: string;
+    lastUsedAt?: string;
     expiresAt?: string;
 }
 
@@ -57,7 +57,7 @@ export default function SettingsPage() {
 
             if (response.ok) {
                 const data = await response.json();
-                setNewlyCreatedKey(data.data?.key || data.key);
+                setNewlyCreatedKey(data.data?.apiSecret || data.apiSecret);
                 setNewKeyName('');
                 fetchApiKeys();
             } else {
@@ -105,6 +105,7 @@ export default function SettingsPage() {
     };
 
     const maskKey = (key: string) => {
+        if (!key) return '••••••••••••••••••••••••••••••••';
         return key.substring(0, 12) + '•'.repeat(20);
     };
 
@@ -157,7 +158,7 @@ export default function SettingsPage() {
                                             <h3 className="font-semibold text-gray-900 mb-1">{apiKey.name}</h3>
                                             <div className="flex items-center gap-2 mb-2">
                                                 <code className="text-sm bg-gray-100 px-3 py-1 rounded font-mono text-gray-700">
-                                                    {visibleKeys.has(apiKey.id) ? apiKey.key : maskKey(apiKey.key)}
+                                                    {visibleKeys.has(apiKey.id) ? apiKey.apiKey : maskKey(apiKey.apiKey)}
                                                 </code>
                                                 <button
                                                     onClick={() => toggleKeyVisibility(apiKey.id)}
@@ -171,7 +172,7 @@ export default function SettingsPage() {
                                                     )}
                                                 </button>
                                                 <button
-                                                    onClick={() => copyToClipboard(apiKey.key, apiKey.id)}
+                                                    onClick={() => copyToClipboard(apiKey.apiKey, apiKey.id)}
                                                     className="text-gray-500 hover:text-gray-700 p-1"
                                                     title="Copy to clipboard"
                                                 >
@@ -184,8 +185,8 @@ export default function SettingsPage() {
                                             </div>
                                             <div className="flex gap-4 text-xs text-gray-500">
                                                 <span>Created: {new Date(apiKey.createdAt).toLocaleDateString()}</span>
-                                                {apiKey.lastUsed && (
-                                                    <span>Last used: {new Date(apiKey.lastUsed).toLocaleDateString()}</span>
+                                                {apiKey.lastUsedAt && (
+                                                    <span>Last used: {new Date(apiKey.lastUsedAt).toLocaleDateString()}</span>
                                                 )}
                                             </div>
                                         </div>
