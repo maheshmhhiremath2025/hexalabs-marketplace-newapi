@@ -50,7 +50,7 @@ export default function SettingsPage() {
                     name: newKeyName,
                     description: 'LMS Integration API Key',
                     scopes: ['labs:read', 'labs:write', 'users:read', 'orders:read', 'orders:write'],
-                    tier: 'standard',
+                    tier: 'free',
                     environment: 'production'
                 })
             });
