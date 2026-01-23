@@ -46,17 +46,27 @@ export default function SettingsPage() {
             const response = await fetch('/api/v1/api-keys', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name: newKeyName })
+                body: JSON.stringify({
+                    name: newKeyName,
+                    description: 'LMS Integration API Key',
+                    scopes: ['read:courses', 'write:orders', 'read:labs', 'write:labs'],
+                    tier: 'standard',
+                    environment: 'production'
+                })
             });
 
             if (response.ok) {
                 const data = await response.json();
-                setNewlyCreatedKey(data.key);
+                setNewlyCreatedKey(data.apiKey?.key || data.key);
                 setNewKeyName('');
                 fetchApiKeys();
+            } else {
+                const error = await response.json();
+                alert(`Failed to create API key: ${error.error || 'Unknown error'}`);
             }
         } catch (error) {
             console.error('Failed to create API key:', error);
+            alert('Failed to create API key. Please try again.');
         }
     };
 
