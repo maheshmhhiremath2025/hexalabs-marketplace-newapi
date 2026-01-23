@@ -136,7 +136,7 @@ export async function revokeApiKey(apiKeyId: string, userId: string) {
  * List user's API keys
  */
 export async function listApiKeys(userId: string, organizationId?: string) {
-    const query: any = { userId };
+    const query: any = { userId, status: 'active' }; // Only show active keys
 
     if (organizationId) {
         query.organizationId = organizationId;
