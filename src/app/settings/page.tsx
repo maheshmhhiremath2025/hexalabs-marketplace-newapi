@@ -30,7 +30,7 @@ export default function SettingsPage() {
             const response = await fetch('/api/v1/api-keys');
             if (response.ok) {
                 const data = await response.json();
-                setApiKeys(data.apiKeys || []);
+                setApiKeys(data.data || []);
             }
         } catch (error) {
             console.error('Failed to fetch API keys:', error);
@@ -57,7 +57,7 @@ export default function SettingsPage() {
 
             if (response.ok) {
                 const data = await response.json();
-                setNewlyCreatedKey(data.apiKey?.key || data.key);
+                setNewlyCreatedKey(data.data?.key || data.key);
                 setNewKeyName('');
                 fetchApiKeys();
             } else {
